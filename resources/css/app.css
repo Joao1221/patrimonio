@@ -1,0 +1,68 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    body {
+        @apply bg-slate-100 text-slate-900 antialiased;
+        background-image:
+            radial-gradient(circle at 100% 0%, rgba(8, 47, 73, 0.22) 0, transparent 36%),
+            radial-gradient(circle at 0% 100%, rgba(6, 182, 212, 0.15) 0, transparent 42%);
+    }
+
+    h1 {
+        @apply tracking-tight;
+    }
+
+    input,
+    select,
+    textarea {
+        @apply bg-white border-slate-200 shadow-sm;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        @apply border-cyan-500 ring-2 ring-cyan-200 outline-none;
+    }
+}
+
+@layer components {
+    .panel {
+        @apply rounded-2xl border border-slate-200/80 bg-white/90 shadow-sm backdrop-blur;
+        box-shadow: 0 12px 30px -18px rgba(2, 6, 23, 0.35), 0 4px 8px -6px rgba(8, 47, 73, 0.22);
+    }
+
+    .panel-soft {
+        @apply rounded-xl border border-slate-200 bg-slate-50/70;
+    }
+
+    .btn {
+        @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition text-white;
+        background: linear-gradient(135deg, #0f172a 0%, #0f3d5e 55%, #0891b2 100%);
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.06);
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition bg-slate-800 text-white hover:bg-slate-900;
+    }
+
+    .btn-muted {
+        @apply inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold transition bg-cyan-50 text-cyan-900 border border-cyan-200 hover:bg-cyan-100;
+    }
+}

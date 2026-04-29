@@ -1,0 +1,36 @@
+# Local (XAMPP subfolder) + fallback routing to /public
+
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
+</IfModule>
+
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /patrimonio/
+
+    # Root path in subfolder must point to /public/.
+    RewriteRule ^$ public/ [L,R=302]
+
+    # Keep requests that already point to /patrimonio/public.
+    RewriteCond %{REQUEST_URI} ^/patrimonio/public/ [NC]
+    RewriteRule ^ - [L]
+
+    # Keep direct access to existing files/folders in project root.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Send all app requests to Laravel public folder.
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
+</IfModule>
+
+# Block sensitive files.
+<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
