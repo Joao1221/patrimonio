@@ -23,7 +23,7 @@ class SetorController extends Controller
 
     public function create(): View
     {
-        return view('auxiliares.create', ['titulo' => 'Novo setor', 'rota' => 'setores', 'campoCidade' => false]);
+        return view('auxiliares.create', ['titulo' => 'Novo setor', 'tituloSingular' => 'Setor', 'rota' => 'setores', 'campoCidade' => false]);
     }
 
     public function store(StoreSetorRequest $request): RedirectResponse
@@ -35,12 +35,12 @@ class SetorController extends Controller
 
     public function show(Setor $setore): View
     {
-        return view('auxiliares.show', ['titulo' => 'Setor', 'rota' => 'setores', 'item' => $setore, 'campoCidade' => false]);
+        return view('auxiliares.show', ['titulo' => 'Setor', 'tituloSingular' => 'Setor', 'rota' => 'setores', 'item' => $setore, 'campoCidade' => false]);
     }
 
     public function edit(Setor $setore): View
     {
-        return view('auxiliares.edit', ['titulo' => 'Editar setor', 'rota' => 'setores', 'item' => $setore, 'campoCidade' => false]);
+        return view('auxiliares.edit', ['titulo' => 'Editar setor', 'tituloSingular' => 'Setor', 'rota' => 'setores', 'item' => $setore, 'campoCidade' => false]);
     }
 
     public function update(Request $request, Setor $setore): RedirectResponse

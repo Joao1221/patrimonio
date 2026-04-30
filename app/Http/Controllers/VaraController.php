@@ -18,7 +18,7 @@ class VaraController extends Controller
             'titulo' => 'Varas',
             'rota' => 'varas',
             'campoCidade' => true,
-            'itens' => Vara::with('cidadeComarca')->orderBy('nome')->paginate(20),
+            'itens' => Vara::with('cidadeComarca')->orderByRaw('(SELECT nome FROM cidades_comarcas WHERE id = varas.cidade_comarca_id)')->orderBy('nome')->paginate(20),
         ]);
     }
 
@@ -26,6 +26,7 @@ class VaraController extends Controller
     {
         return view('auxiliares.create', [
             'titulo' => 'Nova vara',
+            'tituloSingular' => 'Vara',
             'rota' => 'varas',
             'campoCidade' => true,
             'cidades' => CidadeComarca::where('ativo', true)->orderBy('nome')->get(),
@@ -43,6 +44,7 @@ class VaraController extends Controller
     {
         return view('auxiliares.show', [
             'titulo' => 'Vara',
+            'tituloSingular' => 'Vara',
             'rota' => 'varas',
             'item' => $vara->load('cidadeComarca'),
             'campoCidade' => true,
@@ -53,6 +55,7 @@ class VaraController extends Controller
     {
         return view('auxiliares.edit', [
             'titulo' => 'Editar vara',
+            'tituloSingular' => 'Vara',
             'rota' => 'varas',
             'item' => $vara->load('cidadeComarca'),
             'campoCidade' => true,

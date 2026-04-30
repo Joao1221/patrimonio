@@ -23,7 +23,7 @@ class TipoEquipamentoController extends Controller
 
     public function create(): View
     {
-        return view('auxiliares.create', ['titulo' => 'Novo tipo de equipamento', 'rota' => 'tipos-equipamento', 'campoCidade' => false]);
+        return view('auxiliares.create', ['titulo' => 'Novo tipo de equipamento', 'tituloSingular' => 'Tipo de Equipamento', 'rota' => 'tipos-equipamento', 'campoCidade' => false]);
     }
 
     public function store(StoreTipoEquipamentoRequest $request): RedirectResponse
@@ -35,12 +35,12 @@ class TipoEquipamentoController extends Controller
 
     public function show(TipoEquipamento $tipos_equipamento): View
     {
-        return view('auxiliares.show', ['titulo' => 'Tipo de equipamento', 'rota' => 'tipos-equipamento', 'item' => $tipos_equipamento, 'campoCidade' => false]);
+        return view('auxiliares.show', ['titulo' => 'Tipo de equipamento', 'tituloSingular' => 'Tipo de Equipamento', 'rota' => 'tipos-equipamento', 'item' => $tipos_equipamento, 'campoCidade' => false]);
     }
 
     public function edit(TipoEquipamento $tipos_equipamento): View
     {
-        return view('auxiliares.edit', ['titulo' => 'Editar tipo de equipamento', 'rota' => 'tipos-equipamento', 'item' => $tipos_equipamento, 'campoCidade' => false]);
+        return view('auxiliares.edit', ['titulo' => 'Editar tipo de equipamento', 'tituloSingular' => 'Tipo de Equipamento', 'rota' => 'tipos-equipamento', 'item' => $tipos_equipamento, 'campoCidade' => false]);
     }
 
     public function update(Request $request, TipoEquipamento $tipos_equipamento): RedirectResponse

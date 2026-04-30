@@ -1,14 +1,23 @@
 @extends('layouts.app')
 
+@section('title', 'Novo Equipamento')
+
 @section('content')
-<div class="panel p-4 space-y-4">
-    <h1 class="text-2xl font-bold">Novo equipamento</h1>
-    <form method="POST" action="{{ route('equipamentos.store') }}" class="space-y-4">
+<div class="space-y-6">
+    <div>
+        <h1 class="text-2xl font-bold text-slate-900">Novo equipamento</h1>
+        <p class="text-slate-500 text-sm mt-1">Preencha os dados para cadastrar</p>
+    </div>
+
+    <form method="POST" action="{{ route('equipamentos.store') }}" class="panel p-5 space-y-5">
         @csrf
         @include('equipamentos._form')
-        <div class="flex gap-2">
-            <button class="btn-primary">Salvar</button>
-            <a href="{{ route('equipamentos.index') }}" class="btn-muted">Cancelar</a>
+        <div class="flex gap-3 pt-4 border-t border-slate-200">
+            <button class="btn-primary">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Salvar
+            </button>
+            <a href="{{ route('equipamentos.index') }}" class="btn-secondary">Cancelar</a>
         </div>
     </form>
 </div>

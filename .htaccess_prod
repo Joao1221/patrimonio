@@ -16,7 +16,3 @@
     Order allow,deny
     Deny from all
 </FilesMatch>
-
-<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
-    Require all denied
-</FilesMatch>

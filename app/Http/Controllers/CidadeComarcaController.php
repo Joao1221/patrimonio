@@ -25,7 +25,7 @@ class CidadeComarcaController extends Controller
 
     public function create(): View
     {
-        return view('auxiliares.create', ['titulo' => 'Nova cidade/comarca', 'rota' => 'cidades-comarcas', 'campoCidade' => false]);
+        return view('auxiliares.create', ['titulo' => 'Nova cidade/comarca', 'tituloSingular' => 'Cidade/Comarca', 'rota' => 'cidades-comarcas', 'campoCidade' => false]);
     }
 
     public function store(StoreCidadeComarcaRequest $request): RedirectResponse
@@ -37,12 +37,12 @@ class CidadeComarcaController extends Controller
 
     public function show(CidadeComarca $cidades_comarca): View
     {
-        return view('auxiliares.show', ['titulo' => 'Cidade/Comarca', 'rota' => 'cidades-comarcas', 'item' => $cidades_comarca, 'campoCidade' => false]);
+        return view('auxiliares.show', ['titulo' => 'Cidade/Comarca', 'tituloSingular' => 'Cidade/Comarca', 'rota' => 'cidades-comarcas', 'item' => $cidades_comarca, 'campoCidade' => false]);
     }
 
     public function edit(CidadeComarca $cidades_comarca): View
     {
-        return view('auxiliares.edit', ['titulo' => 'Editar cidade/comarca', 'rota' => 'cidades-comarcas', 'item' => $cidades_comarca, 'campoCidade' => false]);
+        return view('auxiliares.edit', ['titulo' => 'Editar cidade/comarca', 'tituloSingular' => 'Cidade/Comarca', 'rota' => 'cidades-comarcas', 'item' => $cidades_comarca, 'campoCidade' => false]);
     }
 
     public function update(Request $request, CidadeComarca $cidades_comarca): RedirectResponse

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 29/04/2026 às 17:59
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Host: sql311.infinityfree.com
+-- Tempo de geração: 30/04/2026 às 09:34
+-- Versão do servidor: 11.4.10-MariaDB
+-- Versão do PHP: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `patrimonio`
+-- Banco de dados: `if0_41787007_patrimonio`
 --
 
 -- --------------------------------------------------------
@@ -212,9 +213,6 @@ INSERT INTO `marcas` (`id`, `nome`, `ativo`, `created_at`, `updated_at`) VALUES
 (3, 'Lenovo', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (4, 'SMS', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (5, 'Epson', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(6, 'Canon', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(7, 'Brother', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(8, 'Outro', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (9, 'Positivo', 1, '2026-04-29 15:29:51', '2026-04-29 15:29:51');
 
 -- --------------------------------------------------------
@@ -276,7 +274,14 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('9O6kFUH1gWKPhNgOB51TkTuy46uRk7D5WRuR34Qs', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRlBrVXZLd0ZBRHE1cFFWRVFhZ1Z0QThoSzh6MlllT1ZwdFJRNTVkQiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9sb2NhbGhvc3QvcGF0cmltb25pby9wdWJsaWMvdmFyYXMiO3M6NToicm91dGUiO3M6MTE6InZhcmFzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMjoibGV2YW50YW1lbnRvIjthOjM6e3M6ODoiY29udGV4dG8iO2E6Njp7czoxNzoiY2lkYWRlX2NvbWFyY2FfaWQiO3M6MToiMSI7czo3OiJ2YXJhX2lkIjtzOjE6IjEiO3M6ODoic2V0b3JfaWQiO3M6MToiMSI7czoxOToidGlwb19lcXVpcGFtZW50b19pZCI7czoxOiIxIjtzOjg6Im1hcmNhX2lkIjtzOjE6IjkiO3M6NjoibW9kZWxvIjtzOjk6Ik1pbmkgMzAwMCI7fXM6ODoiY29udGFkb3IiO2k6MTtzOjExOiJ1bHRpbW9zX2lkcyI7YToxOntpOjA7aToxO319fQ==', 1777477565);
+('08zy3JhFQsIx9QGOaAtLApdGY4k07OcqwQ7zxRcR', NULL, '191.58.115.160', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36 EdgA/147.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiSzg1YVdFUmR0TGhaMW1OYkJGVHlhaGxzQ3paZjJKcmV2S21URlU4cCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTk6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9lcXVpcGFtZW50b3MtbGV2YW50YW1lbnRvIjtzOjU6InJvdXRlIjtzOjI1OiJlcXVpcGFtZW50b3MubGV2YW50YW1lbnRvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1777554659),
+('9O6kFUH1gWKPhNgOB51TkTuy46uRk7D5WRuR34Qs', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiRlBrVXZLd0ZBRHE1cFFWRVFhZ1Z0QThoSzh6MlllT1ZwdFJRNTVkQiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly9sb2NhbGhvc3QvcGF0cmltb25pby9wdWJsaWMvdmFyYXMiO3M6NToicm91dGUiO3M6MTE6InZhcmFzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMjoibGV2YW50YW1lbnRvIjthOjM6e3M6ODoiY29udGV4dG8iO2E6Njp7czoxNzoiY2lkYWRlX2NvbWFyY2FfaWQiO3M6MToiMSI7czo3OiJ2YXJhX2lkIjtzOjE6IjEiO3M6ODoic2V0b3JfaWQiO3M6MToiMSI7czoxOToidGlwb19lcXVpcGFtZW50b19pZCI7czoxOiIxIjtzOjg6Im1hcmNhX2lkIjtzOjE6IjkiO3M6NjoibW9kZWxvIjtzOjk6Ik1pbmkgMzAwMCI7fXM6ODoiY29udGFkb3IiO2k6MTtzOjExOiJ1bHRpbW9zX2lkcyI7YToxOntpOjA7aToxO319fQ==', 1777477565),
+('9uTBCOrOll9q3Lg2H4X1WjgilfNNLlIJkYex6gp7', NULL, '66.249.88.224', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiYUNkM1hMT2ppSmVDczFDSFJ0bUJqTmtJRzAzeGJnbUlwSUVhOWJiRiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9tYXJjYXMiO3M6NToicm91dGUiO3M6MTI6Im1hcmNhcy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1777555978),
+('dJtAdI0XiDtiXIjS0eXZYUcIzIZvWc3AHAK22QOG', NULL, '66.249.85.68', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiTHVUYlllcjVjdlJzWlU0bElVTXJ1djNIemdIV09nOG1RY0tpRWNJbCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9tYXJjYXMiO3M6NToicm91dGUiO3M6MTI6Im1hcmNhcy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1777555977),
+('hIKVCaoDUMC8voj5ZrJ772aM5XLCOllmLh0RzF6I', NULL, '66.249.88.225', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQ3dGdU9ocG44RHloVzhaOUdRWGJZMUZTZDNYM1NuNzRnN2VLWTUwYSI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDA6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9tYXJjYXMiO3M6NToicm91dGUiO3M6MTI6Im1hcmNhcy5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1777555979),
+('i0seMZaRIzoir9dzg0ZSjfUugNcUTYhRwam6o9XY', NULL, '66.249.88.225', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZm1WaDl0SEJvU01BU1Y0NEZYNmVXWU0wMTJaNVZmN0t5OTlOVWo1NiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDE6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9zZXRvcmVzIjtzOjU6InJvdXRlIjtzOjEzOiJzZXRvcmVzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1777556007),
+('tRlU4zsEgCj4QG507jEeeX1Ewnx4f09Q4Bvkr13q', NULL, '191.58.115.160', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZVNNREh1VG85NGdTZmkyaEJOQldNMmZUSjV2bWt4c3R4N2NaUmthSCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTg6Imh0dHA6Ly9wYXRyaW1vbmlvLmZyZWUubmYvcHVibGljL2VxdWlwYW1lbnRvcy1sZXZhbnRhbWVudG8iO3M6NToicm91dGUiO3M6MjU6ImVxdWlwYW1lbnRvcy5sZXZhbnRhbWVudG8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1777555824),
+('WLHr6sdcEiRETAfbVVwEzFs3EdJNjsDDs4s3jEQc', NULL, '191.58.115.160', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnB2ejlud3BHOHo3SFRSQ1dRTUZTNzNYUVhqRENGOU5qTFE1b1hLWCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDE6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9zZXRvcmVzIjtzOjU6InJvdXRlIjtzOjEzOiJzZXRvcmVzLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1777556001);
 
 -- --------------------------------------------------------
 
@@ -303,7 +308,6 @@ INSERT INTO `setores` (`id`, `nome`, `ativo`, `created_at`, `updated_at`) VALUES
 (4, 'Sala de instruções', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (5, 'Atendimento geral', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (7, 'Recepção', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(8, 'Outro', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (9, 'Salão do júri', 1, '2026-04-29 16:58:15', '2026-04-29 16:58:15');
 
 -- --------------------------------------------------------
@@ -329,8 +333,7 @@ INSERT INTO `tipos_equipamento` (`id`, `nome`, `ativo`, `created_at`, `updated_a
 (2, 'Monitor', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (3, 'Nobreak', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
 (4, 'Scanner', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(5, 'Impressora', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32'),
-(6, 'Outro', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32');
+(5, 'Impressora', 1, '2026-04-29 15:25:32', '2026-04-29 15:25:32');
 
 -- --------------------------------------------------------
 
@@ -468,7 +471,7 @@ INSERT INTO `varas` (`id`, `cidade_comarca_id`, `nome`, `ativo`, `created_at`, `
 (97, 50, '2ª Vara Cível', 1, '2026-04-29 18:46:04', '2026-04-29 18:46:04');
 
 --
--- Índices para tabelas despejadas
+-- Índices de tabelas apagadas
 --
 
 --
@@ -580,7 +583,7 @@ ALTER TABLE `varas`
   ADD UNIQUE KEY `varas_cidade_comarca_id_nome_unique` (`cidade_comarca_id`,`nome`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
@@ -644,7 +647,7 @@ ALTER TABLE `varas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para dumps de tabelas
 --
 
 --

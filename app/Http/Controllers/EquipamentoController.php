@@ -19,7 +19,12 @@ class EquipamentoController extends Controller
 {
     public function index(Request $request): View
     {
-        $query = Equipamento::query()->with(['tipoEquipamento', 'marca', 'cidadeComarca', 'vara', 'setor']);
+        $query = Equipamento::query()
+            ->with(['tipoEquipamento', 'marca', 'cidadeComarca', 'vara', 'setor'])
+            ->orderByRaw('(SELECT nome FROM cidades_comarcas WHERE id = equipamentos.cidade_comarca_id)')
+            ->orderByRaw('(SELECT nome FROM tipos_equipamento WHERE id = equipamentos.tipo_equipamento_id)')
+            ->orderByRaw('(SELECT nome FROM setores WHERE id = equipamentos.setor_id)')
+            ->orderByRaw('(SELECT nome FROM marcas WHERE id = equipamentos.marca_id)');
 
         if ($request->filled('codigo_patrimonio')) {
             $query->where('codigo_patrimonio', 'like', '%' . $request->string('codigo_patrimonio') . '%');
@@ -31,7 +36,15 @@ class EquipamentoController extends Controller
             }
         }
 
-        $equipamentos = $query->latest()->paginate(20)->withQueryString();
+        $equipamentos = $query->paginate(20)->withQueryString();
+
+        $totalGeral = Equipamento::count();
+        $totalCidade = $request->filled('cidade_comarca_id') 
+            ? Equipamento::where('cidade_comarca_id', $request->integer('cidade_comarca_id'))->count()
+            : $totalGeral;
+        $totalVara = $request->filled('vara_id')
+            ? Equipamento::where('vara_id', $request->integer('vara_id'))->count()
+            : ($request->filled('cidade_comarca_id') ? $totalCidade : $totalGeral);
 
         return view('equipamentos.index', [
             'equipamentos' => $equipamentos,
@@ -41,6 +54,9 @@ class EquipamentoController extends Controller
             'varas' => Vara::where('ativo', true)->orderBy('nome')->get(),
             'setores' => Setor::where('ativo', true)->orderBy('nome')->get(),
             'filters' => $request->all(),
+            'totalGeral' => $totalGeral,
+            'totalCidade' => $totalCidade,
+            'totalVara' => $totalVara,
         ]);
     }
 
@@ -85,9 +101,11 @@ class EquipamentoController extends Controller
 
     public function destroy(Equipamento $equipamento): RedirectResponse
     {
+        $equipamento->delete();
+        
         return redirect()
             ->route('equipamentos.index')
-            ->with('error', 'Exclusao desabilitada para equipamentos. Utilize edicao para ajustes.');
+            ->with('success', 'Equipamento excluído com sucesso.');
     }
 
     public function buscarPorCodigo(string $codigo): JsonResponse

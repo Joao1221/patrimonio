@@ -23,7 +23,7 @@ class MarcaController extends Controller
 
     public function create(): View
     {
-        return view('auxiliares.create', ['titulo' => 'Nova marca', 'rota' => 'marcas', 'campoCidade' => false]);
+        return view('auxiliares.create', ['titulo' => 'Nova marca', 'tituloSingular' => 'Marca', 'rota' => 'marcas', 'campoCidade' => false]);
     }
 
     public function store(StoreMarcaRequest $request): RedirectResponse
@@ -35,12 +35,12 @@ class MarcaController extends Controller
 
     public function show(Marca $marca): View
     {
-        return view('auxiliares.show', ['titulo' => 'Marca', 'rota' => 'marcas', 'item' => $marca, 'campoCidade' => false]);
+        return view('auxiliares.show', ['titulo' => 'Marca', 'tituloSingular' => 'Marca', 'rota' => 'marcas', 'item' => $marca, 'campoCidade' => false]);
     }
 
     public function edit(Marca $marca): View
     {
-        return view('auxiliares.edit', ['titulo' => 'Editar marca', 'rota' => 'marcas', 'item' => $marca, 'campoCidade' => false]);
+        return view('auxiliares.edit', ['titulo' => 'Editar marca', 'tituloSingular' => 'Marca', 'rota' => 'marcas', 'item' => $marca, 'campoCidade' => false]);
     }
 
     public function update(Request $request, Marca $marca): RedirectResponse
