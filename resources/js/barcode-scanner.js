@@ -1,31 +1,61 @@
-import { BrowserMultiFormatReader } from '@zxing/browser';
+import {
+    BrowserMultiFormatReader,
+    BarcodeFormat,
+    DecodeHintType
+} from '@zxing/library';
+
+function isValidCode(code) {
+    return /^\d{6}$/.test(code);
+}
 
 class BarcodeScanner {
     constructor(options = {}) {
         this.videoElement = options.videoElement;
         this.onDetected = options.onDetected || (() => {});
         this.onError = options.onError || (() => {});
-        this.reader = new BrowserMultiFormatReader();
+
+        const hints = new Map();
+        hints.set(DecodeHintType.POSSIBLE_FORMATS, [BarcodeFormat.CODE_128]);
+
+        this.reader = new BrowserMultiFormatReader(hints);
         this.controls = null;
-        this.stream = null;
         this.active = false;
+        this.hasDetected = false;
     }
 
     async start() {
         try {
-            this.assertSecureContext();
-            const deviceId = await this.pickBackCamera();
+            if (!this.hasGetUserMedia()) {
+                throw new Error('MEDIA_UNAVAILABLE');
+            }
+
+            const deviceId = await this.pickCamera();
             this.active = true;
-            this.controls = await this.reader.decodeFromVideoDevice(deviceId, this.videoElement, (result, error) => {
-                if (!this.active) return;
-                if (result?.getText()) {
-                    this.onDetected(result.getText());
-                    this.stop();
-                } else if (error && error.name !== 'NotFoundException') {
-                    this.onError(this.humanizeError(error));
+            this.hasDetected = false;
+
+            this.controls = await this.reader.decodeFromVideoDevice(
+                deviceId,
+                this.videoElement,
+                (result, error) => {
+                    if (!this.active || this.hasDetected) return;
+
+                    if (result?.getText()) {
+                        const text = result.getText().trim();
+
+                        if (isValidCode(text)) {
+                            this.hasDetected = true;
+                            this.onDetected(text);
+                            this.stop();
+                        }
+                    } else if (error && error.name !== 'NotFoundException') {
+                        this.onError(this.humanizeError(error));
+                    }
                 }
-            });
-            this.stream = this.videoElement?.srcObject || null;
+            );
+
+            if (this.videoElement) {
+                this.videoElement.play().catch(() => {});
+            }
         } catch (error) {
             this.onError(this.humanizeError(error));
         }
@@ -33,58 +63,47 @@ class BarcodeScanner {
 
     stop() {
         this.active = false;
-        if (this.controls?.stop) {
+        if (this.controls) {
             this.controls.stop();
-        }
-        if (this.stream?.getTracks) {
-            this.stream.getTracks().forEach((track) => track.stop());
+            this.controls = null;
         }
         this.reader.reset();
-        if (this.videoElement) {
-            this.videoElement.srcObject = null;
-        }
-        this.controls = null;
-        this.stream = null;
     }
 
-    async pickBackCamera() {
-        const devices = await BrowserMultiFormatReader.listVideoInputDevices();
+    async pickCamera() {
+        const devices = await this.reader.listVideoInputDevices();
         if (!devices?.length) {
             throw new Error('NO_CAMERA');
         }
-        const back = devices.find((d) => /back|traseira|rear|environment/i.test(d.label));
-        return back ? back.deviceId : devices[0].deviceId;
+        const back = devices.find(d =>
+            /back|traseira|rear|environment/i.test(d.label)
+        );
+        return back?.deviceId || devices[0].deviceId;
     }
 
-    assertSecureContext() {
-        const host = window.location.hostname;
-        const isLocalhost = host === 'localhost' || host === '127.0.0.1';
-        if (!(window.isSecureContext || isLocalhost)) {
-            throw new Error('INSECURE_CONTEXT');
-        }
-        if (!navigator.mediaDevices?.getUserMedia) {
-            throw new Error('MEDIA_UNAVAILABLE');
-        }
+    hasGetUserMedia() {
+        return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     }
 
     humanizeError(error) {
         const code = error?.message || error?.name || 'UNKNOWN';
-        if (code === 'INSECURE_CONTEXT') {
-            return 'A camera so funciona em ambiente seguro. Use HTTPS ou localhost para testes.';
+        if (code === 'MEDIA_UNAVAILABLE') {
+            return 'Camera not available.';
         }
         if (code === 'NO_CAMERA' || code === 'NotFoundError') {
-            return 'Nenhuma camera foi encontrada neste dispositivo.';
+            return 'No camera found.';
         }
         if (code === 'NotAllowedError' || code === 'PermissionDeniedError') {
-            return 'Permissao da camera negada. Libere o acesso nas configuracoes do navegador ou digite o codigo manualmente.';
+            return 'Camera permission denied.';
         }
-        return 'Nao foi possivel iniciar a camera. Digite o codigo manualmente ou tente novamente.';
+        return 'Camera error. Enter code manually.';
     }
 }
 
 function initBarcodeScannerUI() {
     const modal = document.getElementById('barcode-scanner-modal');
     if (!modal) return;
+
     const video = document.getElementById('barcode-video');
     const status = document.getElementById('barcode-status');
     const closeBtn = document.getElementById('barcode-close');
@@ -92,12 +111,11 @@ function initBarcodeScannerUI() {
     let currentInput = null;
     let scanner = null;
 
-    const setStatus = (message, kind = 'neutral') => {
-        status.textContent = message;
-        status.className = 'text-sm';
-        if (kind === 'error') status.classList.add('text-red-700');
-        if (kind === 'success') status.classList.add('text-emerald-700');
-        if (kind === 'neutral') status.classList.add('text-slate-600');
+    const setStatus = (msg, kind = 'neutral') => {
+        status.textContent = msg;
+        status.className = 'text-sm text-slate-600';
+        if (kind === 'error') status.className = 'text-sm text-red-700';
+        if (kind === 'success') status.className = 'text-sm text-emerald-700';
     };
 
     const closeModal = () => {
@@ -116,17 +134,17 @@ function initBarcodeScannerUI() {
             const inputId = btn.getAttribute('data-target-input');
             currentInput = inputId ? document.getElementById(inputId) : null;
             modal.classList.remove('hidden');
-            setStatus('Aponte a camera para o codigo de barras.');
+            setStatus('Point camera at barcode...');
 
             scanner = new BarcodeScanner({
                 videoElement: video,
-                onDetected: async (value) => {
+                onDetected: (value) => {
                     if (currentInput) {
                         currentInput.value = value;
                         currentInput.dispatchEvent(new Event('blur', { bubbles: true }));
                     }
-                    setStatus(`Codigo lido: ${value}`, 'success');
-                    setTimeout(closeModal, 600);
+                    setStatus(`Read: ${value}`, 'success');
+                    setTimeout(closeModal, 1000);
                 },
                 onError: (msg) => setStatus(msg, 'error'),
             });
@@ -136,4 +154,4 @@ function initBarcodeScannerUI() {
     });
 }
 
-export { BarcodeScanner, initBarcodeScannerUI };
+export { BarcodeScanner, initBarcodeScannerUI, isValidCode };

@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Se já está em /public, não redirecionar
+    RewriteCond %{REQUEST_URI} ^/public/ [NC]
+    RewriteRule ^ - [L]
+
+    # Redirecionar tudo para public
+    RewriteCond %{REQUEST_URI} !public
+    RewriteRule ^(.*)$ public/$1 [L,R=301]
+</IfModule>
+
+# Segurança - bloquear arquivos ocultos
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
