@@ -44,6 +44,25 @@
                     <a class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/5 transition" href="{{ route('cidades-comarcas.index') }}">Cidades</a>
                     <a class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/5 transition" href="{{ route('varas.index') }}">Varas</a>
                     <a class="px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-white/5 transition" href="{{ route('setores.index') }}">Setores</a>
+                    @if(auth()->user()?->canManageUsers())
+                    <div class="w-px h-6 bg-slate-700 mx-2"></div>
+                    <a class="px-3 py-2 rounded-lg text-xs font-medium text-amber-400 hover:text-amber-200 hover:bg-white/5 transition" href="{{ route('usuarios.index') }}">Usuários</a>
+                    @endif
+                    <div class="w-px h-6 bg-slate-700 mx-2"></div>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('perfil.edit') }}" class="text-right group" title="Meu perfil">
+                            <p class="text-xs font-semibold text-white leading-tight group-hover:text-cyan-300 transition-colors">{{ auth()->user()?->name }}</p>
+                            <span class="text-xs px-1.5 py-0.5 rounded font-medium {{ auth()->user()?->papel?->badgeClass() }}">
+                                {{ auth()->user()?->papel?->label() }}
+                            </span>
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" title="Sair" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                            </button>
+                        </form>
+                    </div>
                 </nav>
                 <button id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 text-slate-300 hover:text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -58,6 +77,22 @@
                     <a class="rounded-lg bg-white/10 px-3 py-2 text-cyan-100 hover:bg-white/20" href="{{ route('cidades-comarcas.index') }}">Cidades</a>
                     <a class="rounded-lg bg-white/10 px-3 py-2 text-cyan-100 hover:bg-white/20" href="{{ route('varas.index') }}">Varas</a>
                     <a class="rounded-lg bg-white/10 px-3 py-2 text-cyan-100 hover:bg-white/20" href="{{ route('setores.index') }}">Setores</a>
+                    @if(auth()->user()?->canManageUsers())
+                    <a class="rounded-lg bg-amber-500/20 px-3 py-2 text-amber-200 hover:bg-amber-500/30" href="{{ route('usuarios.index') }}">Usuários</a>
+                    @endif
+                    <div class="border-t border-slate-700/50 pt-2 mt-1 flex items-center justify-between px-1">
+                        <a href="{{ route('perfil.edit') }}" class="group">
+                            <p class="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors">{{ auth()->user()?->name }}</p>
+                            <p class="text-xs text-slate-400">{{ auth()->user()?->papel?->label() }} · <span class="text-cyan-400">Meu perfil</span></p>
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                                Sair
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </nav>
         </div>

@@ -94,6 +94,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    const baseUrl = `{{ rtrim(request()->getSchemeAndHttpHost() . request()->getBasePath(), '/') }}`;
     const cidade = document.getElementById('cidade_comarca_id');
     const vara = document.getElementById('vara_id');
     const selectedVara = "{{ old('vara_id', $eq?->vara_id) }}";
@@ -103,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const previous = vara.value;
         vara.innerHTML = '<option value="">Selecione</option>';
         if (!cidadeId) return;
-        const response = await fetch(`/api/cidades-comarcas/${cidadeId}/varas`);
+        const response = await fetch(`${baseUrl}/api/cidades-comarcas/${cidadeId}/varas`);
         const data = await response.json();
         data.forEach(item => {
             const option = document.createElement('option');
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
             feedback.classList.add('hidden');
             return;
         }
-        const response = await fetch(`/api/equipamentos/verificar-codigo/${encodeURIComponent(valor)}`);
+        const response = await fetch(`${baseUrl}/api/equipamentos/verificar-codigo/${encodeURIComponent(valor)}`);
         const data = await response.json();
         if (!data.exists || !data.equipamento || String(data.equipamento.id) === String(editingId)) {
             feedback.classList.add('hidden');

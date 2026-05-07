@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             SetoresSeeder::class,
             CidadesComarcasSeeder::class,
             VarasSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

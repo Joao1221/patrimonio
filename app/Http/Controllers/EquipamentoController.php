@@ -19,8 +19,11 @@ class EquipamentoController extends Controller
 {
     public function index(Request $request): View
     {
+        $cidadeRestrita = auth()->user()->cidade_comarca_id;
+
         $query = Equipamento::query()
             ->with(['tipoEquipamento', 'marca', 'cidadeComarca', 'vara', 'setor'])
+            ->when($cidadeRestrita, fn($q) => $q->where('cidade_comarca_id', $cidadeRestrita))
             ->orderByRaw('(SELECT nome FROM cidades_comarcas WHERE id = equipamentos.cidade_comarca_id)')
             ->orderByRaw('(SELECT nome FROM tipos_equipamento WHERE id = equipamentos.tipo_equipamento_id)')
             ->orderByRaw('(SELECT nome FROM setores WHERE id = equipamentos.setor_id)')
@@ -30,33 +33,53 @@ class EquipamentoController extends Controller
             $query->where('codigo_patrimonio', 'like', '%' . $request->string('codigo_patrimonio') . '%');
         }
 
-        foreach (['tipo_equipamento_id', 'marca_id', 'cidade_comarca_id', 'vara_id', 'setor_id'] as $filter) {
+        foreach (['tipo_equipamento_id', 'marca_id', 'setor_id'] as $filter) {
             if ($request->filled($filter)) {
                 $query->where($filter, $request->integer($filter));
             }
         }
 
+        // cidade só filtra se o usuário tiver acesso livre
+        if (!$cidadeRestrita && $request->filled('cidade_comarca_id')) {
+            $query->where('cidade_comarca_id', $request->integer('cidade_comarca_id'));
+        }
+
+        // vara
+        if ($request->filled('vara_id')) {
+            $query->where('vara_id', $request->integer('vara_id'));
+        }
+
         $equipamentos = $query->paginate(20)->withQueryString();
 
-        $totalGeral = Equipamento::count();
-        $totalCidade = $request->filled('cidade_comarca_id') 
-            ? Equipamento::where('cidade_comarca_id', $request->integer('cidade_comarca_id'))->count()
-            : $totalGeral;
-        $totalVara = $request->filled('vara_id')
-            ? Equipamento::where('vara_id', $request->integer('vara_id'))->count()
-            : ($request->filled('cidade_comarca_id') ? $totalCidade : $totalGeral);
+        // Para os cards de stats, cidade restrita tem prioridade
+        $cidadeIdStats = $cidadeRestrita
+            ?? ($request->filled('cidade_comarca_id') ? $request->integer('cidade_comarca_id') : null);
+        $varaId = $request->filled('vara_id') ? $request->integer('vara_id') : null;
+
+        $totalEquipamentos = Equipamento::query()
+            ->when($varaId,                           fn($q) => $q->where('vara_id', $varaId))
+            ->when(!$varaId && $cidadeIdStats,        fn($q) => $q->where('cidade_comarca_id', $cidadeIdStats))
+            ->count();
+
+        $totaisPorTipo = TipoEquipamento::withCount(['equipamentos' => function ($q) use ($cidadeIdStats, $varaId) {
+            if ($varaId) {
+                $q->where('vara_id', $varaId);
+            } elseif ($cidadeIdStats) {
+                $q->where('cidade_comarca_id', $cidadeIdStats);
+            }
+        }])->orderBy('nome')->get();
 
         return view('equipamentos.index', [
-            'equipamentos' => $equipamentos,
-            'tipos' => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
-            'marcas' => Marca::where('ativo', true)->orderBy('nome')->get(),
-            'cidades' => CidadeComarca::where('ativo', true)->orderBy('nome')->get(),
-            'varas' => Vara::where('ativo', true)->orderBy('nome')->get(),
-            'setores' => Setor::where('ativo', true)->orderBy('nome')->get(),
-            'filters' => $request->all(),
-            'totalGeral' => $totalGeral,
-            'totalCidade' => $totalCidade,
-            'totalVara' => $totalVara,
+            'equipamentos'      => $equipamentos,
+            'tipos'             => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
+            'marcas'            => Marca::where('ativo', true)->orderBy('nome')->get(),
+            'cidades'           => $this->cidadesPermitidas(),
+            'varas'             => Vara::where('ativo', true)->orderBy('nome')->get(),
+            'setores'           => Setor::where('ativo', true)->orderBy('nome')->get(),
+            'filters'           => $request->all(),
+            'totalEquipamentos' => $totalEquipamentos,
+            'totaisPorTipo'     => $totaisPorTipo,
+            'cidadeRestrita'    => $cidadeRestrita,
         ]);
     }
 
@@ -102,10 +125,37 @@ class EquipamentoController extends Controller
     public function destroy(Equipamento $equipamento): RedirectResponse
     {
         $equipamento->delete();
-        
+
         return redirect()
             ->route('equipamentos.index')
             ->with('success', 'Equipamento excluído com sucesso.');
+    }
+
+    public function stats(Request $request): JsonResponse
+    {
+        $cidadeRestrita = auth()->user()?->cidade_comarca_id;
+
+        $cidadeId = $cidadeRestrita
+            ?? ($request->filled('cidade_comarca_id') ? $request->integer('cidade_comarca_id') : null);
+        $varaId = $request->filled('vara_id') ? $request->integer('vara_id') : null;
+
+        $total = Equipamento::query()
+            ->when($varaId,                    fn($q) => $q->where('vara_id', $varaId))
+            ->when(!$varaId && $cidadeId,      fn($q) => $q->where('cidade_comarca_id', $cidadeId))
+            ->count();
+
+        $porTipo = TipoEquipamento::withCount(['equipamentos' => function ($q) use ($cidadeId, $varaId) {
+            if ($varaId) {
+                $q->where('vara_id', $varaId);
+            } elseif ($cidadeId) {
+                $q->where('cidade_comarca_id', $cidadeId);
+            }
+        }])->orderBy('nome')->get()->map(fn($t) => [
+            'nome'  => $t->nome,
+            'count' => $t->equipamentos_count,
+        ]);
+
+        return response()->json(['total' => $total, 'porTipo' => $porTipo]);
     }
 
     public function buscarPorCodigo(string $codigo): JsonResponse
@@ -128,19 +178,30 @@ class EquipamentoController extends Controller
             ->first();
 
         return response()->json([
-            'exists' => (bool) $equipamento,
+            'exists'      => (bool) $equipamento,
             'equipamento' => $equipamento,
         ]);
+    }
+
+    private function cidadesPermitidas()
+    {
+        $cidadeId = auth()->user()->cidade_comarca_id;
+
+        return CidadeComarca::where('ativo', true)
+            ->when($cidadeId, fn($q) => $q->where('id', $cidadeId))
+            ->orderBy('nome')
+            ->get();
     }
 
     private function formData(array $extra = []): array
     {
         return array_merge([
-            'tipos' => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
-            'marcas' => Marca::where('ativo', true)->orderBy('nome')->get(),
-            'cidades' => CidadeComarca::where('ativo', true)->orderBy('nome')->get(),
-            'varas' => Vara::where('ativo', true)->orderBy('nome')->get(),
-            'setores' => Setor::where('ativo', true)->orderBy('nome')->get(),
+            'tipos'          => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
+            'marcas'         => Marca::where('ativo', true)->orderBy('nome')->get(),
+            'cidades'        => $this->cidadesPermitidas(),
+            'varas'          => Vara::where('ativo', true)->orderBy('nome')->get(),
+            'setores'        => Setor::where('ativo', true)->orderBy('nome')->get(),
+            'cidadeRestrita' => auth()->user()->cidade_comarca_id,
         ], $extra);
     }
 }

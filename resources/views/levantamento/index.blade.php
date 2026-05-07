@@ -13,16 +13,24 @@
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div class="space-y-2">
-                <label for="cidade_comarca_id" class="text-sm font-semibold text-slate-700 flex items-center gap-1">
+                <label class="text-sm font-semibold text-slate-700 flex items-center gap-1">
                     <svg class="w-4 h-4 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                     Cidade/Comarca <span class="text-red-500">*</span>
                 </label>
-                <select id="cidade_comarca_id" name="cidade_comarca_id" class="rounded-lg border-slate-200 w-full" required>
-                    <option value="">Selecione</option>
-                    @foreach ($cidades as $cidade)
-                        <option value="{{ $cidade->id }}" @selected(old('cidade_comarca_id', $contexto['cidade_comarca_id'] ?? null) == $cidade->id)>{{ $cidade->nome }}</option>
-                    @endforeach
-                </select>
+                @if($cidadeRestrita)
+                    <input type="hidden" id="cidade_comarca_id" name="cidade_comarca_id" value="{{ $cidadeRestrita }}">
+                    <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan-50 border border-cyan-200 text-sm font-semibold text-cyan-800">
+                        <svg class="w-4 h-4 text-cyan-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        {{ $cidades->first()?->nome }}
+                    </div>
+                @else
+                    <select id="cidade_comarca_id" name="cidade_comarca_id" class="rounded-lg border-slate-200 w-full" required>
+                        <option value="">Selecione</option>
+                        @foreach ($cidades as $cidade)
+                            <option value="{{ $cidade->id }}" @selected(old('cidade_comarca_id', $contexto['cidade_comarca_id'] ?? null) == $cidade->id)>{{ $cidade->nome }}</option>
+                        @endforeach
+                    </select>
+                @endif
             </div>
             <div class="space-y-2">
                 <label for="vara_id" class="text-sm font-semibold text-slate-700 flex items-center gap-1">

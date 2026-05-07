@@ -26,15 +26,20 @@ class EquipamentoLevantamentoController extends Controller
         $contador = session(self::SESSION_COUNT_KEY, 0);
         $ultimosIds = session(self::SESSION_LAST_IDS_KEY, []);
 
+        $cidadeRestrita = auth()->user()->cidade_comarca_id;
+
         return view('levantamento.index', [
-            'contexto' => $contexto,
-            'contador' => $contador,
-            'ultimos' => Equipamento::with(['tipoEquipamento', 'setor'])->whereIn('id', $ultimosIds)->latest('id')->limit(10)->get(),
-            'tipos' => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
-            'marcas' => Marca::where('ativo', true)->orderBy('nome')->get(),
-            'cidades' => CidadeComarca::where('ativo', true)->orderBy('nome')->get(),
-            'varas' => Vara::where('ativo', true)->orderBy('nome')->get(),
-            'setores' => Setor::where('ativo', true)->orderBy('nome')->get(),
+            'contexto'       => $contexto,
+            'contador'       => $contador,
+            'ultimos'        => Equipamento::with(['tipoEquipamento', 'setor'])->whereIn('id', $ultimosIds)->latest('id')->limit(10)->get(),
+            'tipos'          => TipoEquipamento::where('ativo', true)->orderBy('nome')->get(),
+            'marcas'         => Marca::where('ativo', true)->orderBy('nome')->get(),
+            'cidades'        => CidadeComarca::where('ativo', true)
+                                    ->when($cidadeRestrita, fn($q) => $q->where('id', $cidadeRestrita))
+                                    ->orderBy('nome')->get(),
+            'varas'          => Vara::where('ativo', true)->orderBy('nome')->get(),
+            'setores'        => Setor::where('ativo', true)->orderBy('nome')->get(),
+            'cidadeRestrita' => $cidadeRestrita,
         ]);
     }
 

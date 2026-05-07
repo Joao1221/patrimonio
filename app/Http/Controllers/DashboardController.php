@@ -11,10 +11,22 @@ class DashboardController extends Controller
 {
     public function __invoke(): View
     {
-        $totalEquipamentos = Equipamento::count();
-        $totaisPorTipo = TipoEquipamento::withCount('equipamentos')->orderBy('nome')->get();
-        $totaisPorCidade = CidadeComarca::withCount('equipamentos')->orderBy('nome')->get();
+        $cidadeId = auth()->user()->cidade_comarca_id;
+
+        $totalEquipamentos = Equipamento::when($cidadeId, fn($q) => $q->where('cidade_comarca_id', $cidadeId))
+            ->count();
+
+        $totaisPorTipo = TipoEquipamento::withCount(['equipamentos' => fn($q) =>
+            $q->when($cidadeId, fn($q) => $q->where('cidade_comarca_id', $cidadeId))
+        ])->orderBy('nome')->get();
+
+        $totaisPorCidade = CidadeComarca::withCount(['equipamentos' => fn($q) =>
+            $q->when($cidadeId, fn($q) => $q->where('cidade_comarca_id', $cidadeId))
+        ])->when($cidadeId, fn($q) => $q->where('id', $cidadeId))
+          ->orderBy('nome')->get();
+
         $ultimosEquipamentos = Equipamento::with(['tipoEquipamento', 'cidadeComarca', 'setor'])
+            ->when($cidadeId, fn($q) => $q->where('cidade_comarca_id', $cidadeId))
             ->latest()
             ->limit(10)
             ->get();

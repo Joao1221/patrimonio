@@ -10,10 +10,12 @@
             <p class="text-slate-500 text-sm mt-1">Informações completas do registro</p>
         </div>
         <div class="flex gap-2">
+            @if(auth()->user()->canEdit())
             <a href="{{ route('equipamentos.edit', $equipamento) }}" class="btn-primary">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                 Editar
             </a>
+            @endif
             <a href="{{ route('equipamentos.index') }}" class="btn-muted">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                 Voltar
@@ -86,6 +88,7 @@
         </dl>
     </div>
 
+    @if(auth()->user()->canEdit())
     <div class="panel p-5 border-red-200 bg-red-50/50">
         <h3 class="text-sm font-semibold text-red-800 mb-3">Zona de risco</h3>
         <form method="POST" action="{{ route('equipamentos.destroy', $equipamento) }}" class="flex items-center gap-3">
@@ -98,6 +101,7 @@
             <span class="text-sm text-red-600">Esta ação é irreversível.</span>
         </form>
     </div>
+    @endif
 
     <div class="panel p-5 border-l-4 border-l-cyan-500 bg-cyan-50/50">
         <div class="flex items-center gap-2 text-sm text-slate-600">
