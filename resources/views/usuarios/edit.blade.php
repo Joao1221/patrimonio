@@ -120,25 +120,6 @@
             </div>
         </div>
 
-        {{-- Zona de risco: remover usuário --}}
-        @if($usuario->id !== auth()->id())
-        <div class="panel p-5 border-red-200 bg-red-50/50">
-            <h3 class="text-sm font-semibold text-red-800 mb-3">Zona de risco</h3>
-            <div class="flex items-center gap-4">
-                <form method="POST" action="{{ route('usuarios.destroy', $usuario) }}" class="inline"
-                    onsubmit="return confirm('Tem certeza que deseja remover permanentemente este usuário?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-500/20">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                        Remover usuário
-                    </button>
-                </form>
-                <span class="text-sm text-red-600">Esta ação é irreversível e remove o usuário do sistema.</span>
-            </div>
-        </div>
-        @endif
-
         <div class="flex gap-3">
             <button type="submit" class="btn-primary">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -147,5 +128,24 @@
             <a href="{{ route('usuarios.index') }}" class="btn-secondary">Cancelar</a>
         </div>
     </form>
+
+    {{-- Zona de risco fora do form principal para evitar forms aninhados --}}
+    @if($usuario->id !== auth()->id())
+    <div class="panel p-5 border-red-200 bg-red-50/50">
+        <h3 class="text-sm font-semibold text-red-800 mb-3">Zona de risco</h3>
+        <div class="flex items-center gap-4">
+            <form method="POST" action="{{ route('usuarios.destroy', $usuario) }}"
+                onsubmit="return confirm('Tem certeza que deseja remover permanentemente este usuário?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-500/20">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    Remover usuário
+                </button>
+            </form>
+            <span class="text-sm text-red-600">Esta ação é irreversível e remove o usuário do sistema.</span>
+        </div>
+    </div>
+    @endif
 </div>
 @endsection

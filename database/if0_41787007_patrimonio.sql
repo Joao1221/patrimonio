@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql311.infinityfree.com
--- Tempo de geração: 07/05/2026 às 10:22
+-- Tempo de geração: 08/05/2026 às 06:38
 -- Versão do servidor: 11.4.10-MariaDB
 -- Versão do PHP: 7.2.22
 
@@ -526,9 +526,47 @@ INSERT INTO `equipamentos` (`id`, `tipo_equipamento_id`, `marca_id`, `cidade_com
 (392, 4, 18, 22, 36, 19, '033293', 'SNAPSCAN 1500', NULL, '2026-05-07 21:17:09', '2026-05-07 21:17:09'),
 (393, 4, 24, 22, 36, 19, '081867', NULL, NULL, '2026-05-07 21:19:40', '2026-05-07 21:19:40'),
 (394, 1, 9, 32, 64, 2, '094150', 'mini 44000', NULL, '2026-05-07 21:20:49', '2026-05-07 21:21:58'),
-(395, 1, 9, 32, 64, NULL, '094130', 'mini 44000', NULL, '2026-05-07 21:20:56', '2026-05-07 21:20:56'),
-(396, 1, 9, 32, 64, NULL, '094097', 'mini 44000', NULL, '2026-05-07 21:21:03', '2026-05-07 21:21:03'),
-(397, 1, 9, 32, 64, NULL, '094086', 'mini 44000', NULL, '2026-05-07 21:21:24', '2026-05-07 21:21:24');
+(395, 1, 9, 32, 64, 2, '094130', 'mini 44000', NULL, '2026-05-07 21:20:56', '2026-05-07 21:24:00'),
+(396, 1, 9, 32, 64, 2, '094097', 'mini 44000', NULL, '2026-05-07 21:21:03', '2026-05-07 21:23:36'),
+(397, 1, 9, 32, 64, 2, '094086', 'mini 44000', NULL, '2026-05-07 21:21:24', '2026-05-07 21:23:16'),
+(398, 3, 11, 32, 64, 2, '071718', 'UPS 1200VA', NULL, '2026-05-07 21:24:40', '2026-05-07 21:25:08'),
+(399, 3, 11, 32, 64, 2, '072758', 'UPS 1200VA', NULL, '2026-05-07 21:24:55', '2026-05-07 21:24:55'),
+(400, 3, 11, 32, 64, 2, '072280', 'UPS 1200VA', NULL, '2026-05-07 21:25:24', '2026-05-07 21:25:24'),
+(401, 3, 4, 32, 64, 2, '034540', NULL, NULL, '2026-05-07 21:30:08', '2026-05-07 21:30:08'),
+(402, 3, 19, 32, 64, 9, '011034', 'STAY', NULL, '2026-05-07 21:31:30', '2026-05-07 21:31:30'),
+(403, 1, 9, 32, 64, 9, '095038', 'mini 44000', NULL, '2026-05-07 21:33:52', '2026-05-07 21:33:52'),
+(404, 1, 9, 32, 64, 7, '094072', 'mini 44000', NULL, '2026-05-07 21:34:09', '2026-05-07 21:34:09'),
+(405, 3, 11, 32, 64, 7, '072279', 'UPS 1200VA', NULL, '2026-05-07 21:34:33', '2026-05-07 21:34:33'),
+(406, 3, 11, 32, 64, 5, '071668', 'UPS 1200VA', NULL, '2026-05-07 21:35:43', '2026-05-07 21:35:43'),
+(407, 2, 10, 32, 64, 5, '078469', '22MP55PK', NULL, '2026-05-07 21:36:05', '2026-05-07 21:36:05'),
+(408, 1, 9, 32, 64, 5, '094170', 'mini 44000', NULL, '2026-05-07 21:36:21', '2026-05-07 21:36:21'),
+(409, 1, 9, 32, 64, 5, '094103', 'mini 44000', NULL, '2026-05-07 21:36:27', '2026-05-07 21:36:27'),
+(410, 4, 13, 32, 64, 5, '075305', NULL, NULL, '2026-05-07 21:36:53', '2026-05-07 21:36:53'),
+(411, 4, 13, 32, 64, 5, '075231', NULL, NULL, '2026-05-07 21:37:00', '2026-05-07 21:37:00'),
+(412, 4, 13, 32, 64, 1, '075216', NULL, NULL, '2026-05-07 21:39:00', '2026-05-07 21:39:00'),
+(413, 3, 19, 32, 64, 1, '047556', 'PS800', NULL, '2026-05-07 21:40:18', '2026-05-07 21:40:18'),
+(414, 3, 11, 32, 64, 1, '071816', 'UPS 1200VA', NULL, '2026-05-07 21:40:39', '2026-05-07 21:40:39'),
+(415, 3, 11, 32, 64, 1, '071743', 'UPS 1200VA', NULL, '2026-05-07 21:41:43', '2026-05-07 21:41:43'),
+(416, 3, 11, 32, 64, 1, '071712', 'UPS 1200VA', NULL, '2026-05-07 21:42:23', '2026-05-07 21:42:23'),
+(417, 8, 20, 32, 64, 1, '901983', NULL, NULL, '2026-05-07 21:42:55', '2026-05-07 21:42:55'),
+(418, 3, 4, 32, 64, 1, '091696', 'UPS 1200VA', NULL, '2026-05-07 21:43:23', '2026-05-07 21:43:23'),
+(419, 3, 4, 32, 64, 5, '902732', 'UPS 1200VA', NULL, '2026-05-07 21:43:53', '2026-05-07 21:43:53'),
+(420, 1, 9, 32, 64, 1, '094169', 'mini 44000', NULL, '2026-05-07 21:44:17', '2026-05-07 21:44:17'),
+(421, 1, 9, 32, 64, 1, '094092', 'mini 44000', NULL, '2026-05-07 21:44:24', '2026-05-07 21:44:24'),
+(422, 1, 9, 32, 64, 1, '094081', 'mini 44000', NULL, '2026-05-07 21:44:29', '2026-05-07 21:44:29'),
+(423, 1, 9, 32, 64, 1, '094159', 'mini 44000', NULL, '2026-05-07 21:44:34', '2026-05-07 21:44:34'),
+(424, 1, 9, 32, 64, 1, '094171', 'mini 44000', NULL, '2026-05-07 21:44:40', '2026-05-07 21:44:40'),
+(425, 1, 9, 32, 64, 1, '094085', 'mini 44000', NULL, '2026-05-07 21:44:46', '2026-05-07 21:44:46'),
+(426, 1, 9, 32, 64, 1, '094154', 'mini 44000', NULL, '2026-05-07 21:44:51', '2026-05-07 21:44:51'),
+(427, 1, 9, 32, 64, 1, '094099', 'mini 44000', NULL, '2026-05-07 21:44:56', '2026-05-07 21:44:56'),
+(428, 8, 20, 22, 36, 1, '902058', NULL, NULL, '2026-05-07 21:46:00', '2026-05-07 21:46:00'),
+(429, 4, 18, 32, 64, 10, '023971', 'SNAPSCAN 510', NULL, '2026-05-07 21:50:06', '2026-05-07 21:50:06'),
+(430, 1, 9, 32, 64, 10, '094160', 'mini 44000', NULL, '2026-05-07 21:51:36', '2026-05-07 21:51:36'),
+(431, 8, 20, 32, 64, 10, '900566', NULL, NULL, '2026-05-07 21:51:54', '2026-05-07 21:51:54'),
+(432, 3, 11, 32, 64, 10, '071769', 'UPS 1200VA', NULL, '2026-05-07 21:52:19', '2026-05-07 21:52:19'),
+(433, 3, 11, 32, 64, 3, '071707', 'UPS 1200VA', NULL, '2026-05-07 21:54:34', '2026-05-07 21:54:34'),
+(434, 1, 9, 32, 64, 3, '094132', 'mini 44000', NULL, '2026-05-07 21:54:47', '2026-05-07 21:54:47'),
+(435, 2, 10, 32, 64, 3, '078472', '22MP55PK', NULL, '2026-05-07 21:55:12', '2026-05-07 21:55:12');
 
 -- --------------------------------------------------------
 
@@ -683,12 +721,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('aOKH8cu6kreUT7apf0jShwNSkq44JAmiXHDOEWYl', NULL, '189.96.19.149', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWDN1TkZVMFZ6UnhxU2phV0RtMmRVdmswY1Rwc01hOTFpalVERDdxdCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzM6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYyI7czo1OiJyb3V0ZSI7czo5OiJkYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjEyOiJsZXZhbnRhbWVudG8iO2E6Mzp7czo4OiJjb250ZXh0byI7YTo2OntzOjE3OiJjaWRhZGVfY29tYXJjYV9pZCI7czoyOiIzOCI7czo3OiJ2YXJhX2lkIjtzOjI6Ijc0IjtzOjg6InNldG9yX2lkIjtzOjE6IjkiO3M6MTk6InRpcG9fZXF1aXBhbWVudG9faWQiO3M6MToiMyI7czo4OiJtYXJjYV9pZCI7czoyOiIyMiI7czo2OiJtb2RlbG8iO047fXM6ODoiY29udGFkb3IiO2k6MjtzOjExOiJ1bHRpbW9zX2lkcyI7YToyOntpOjA7aTozODk7aToxO2k6Mzg4O319fQ==', 1778163348),
-('FK0pmukPz5FVnbTHagaRBX1Feqxn8IGaym4q4hxX', NULL, '66.249.88.232', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibUpRWHR5Y2hiek90OGdJbVNwTnhSNTVMV2lPelpNT05PUFEzN0l0aCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYz9pPTEiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1778163265),
-('MIqNDrY0wHCPtpG3v1LtKy9qaj11zIvuF9gmLgyq', NULL, '190.15.116.38', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiWVo4VTIxWGVKSDB2dDNua0xCZXdmY3ZkMG9TNHB2QnVqT0w3c0Z3UyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTA6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9lcXVpcGFtZW50b3MvMzk0IjtzOjU6InJvdXRlIjtzOjE3OiJlcXVpcGFtZW50b3Muc2hvdyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTI6ImxldmFudGFtZW50byI7YTozOntzOjg6ImNvbnRleHRvIjthOjY6e3M6MTc6ImNpZGFkZV9jb21hcmNhX2lkIjtzOjI6IjMyIjtzOjc6InZhcmFfaWQiO3M6MjoiNjQiO3M6ODoic2V0b3JfaWQiO047czoxOToidGlwb19lcXVpcGFtZW50b19pZCI7czoxOiIxIjtzOjg6Im1hcmNhX2lkIjtzOjE6IjkiO3M6NjoibW9kZWxvIjtzOjEwOiJtaW5pIDQ0MDAwIjt9czo4OiJjb250YWRvciI7aToyMjtzOjExOiJ1bHRpbW9zX2lkcyI7YToxMDp7aTowO2k6Mzk3O2k6MTtpOjM5NjtpOjI7aTozOTU7aTozO2k6Mzk0O2k6NDtpOjM5MztpOjU7aTozOTI7aTo2O2k6MzkxO2k6NztpOjM5MDtpOjg7aTozODc7aTo5O2k6Mzg2O319fQ==', 1778163718),
-('nszNutWVZ47lngoU8h4XO0lrpOR548jNqUt5uDWV', NULL, '66.249.85.68', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiODQ4WnRzbEk5WTA4S2hOVnU0Nksxd25YQTJsOTltc2d0ZG9kRmxLeiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYz9pPTEiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1778163263),
-('qH1RbXTD0Vf8hs8iBpqKL0DmXTOuWCCSuJSK857D', NULL, '66.249.88.231', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36 (compatible; Google-Read-Aloud; +https://support.google.com/webmasters/answer/1061943)', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiN1VFU2lSMlhSbU5rM2lPVUdnYzZMcHBDdDQ4WllhSmRsQlJQS2YxbiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYz9pPTEiO3M6NToicm91dGUiO3M6OToiZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1778163265),
-('twkhOwjnko5fXXilU57LT5h3xYrU8L0fzXfybCi4', NULL, '191.52.252.86', 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiOWloUEU3VXdHaEV3TEx5cnh3dWpTS2NkMVRGZXU2MnkwZVFGNWt6RyI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTk6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9lcXVpcGFtZW50b3MtbGV2YW50YW1lbnRvIjtzOjU6InJvdXRlIjtzOjI1OiJlcXVpcGFtZW50b3MubGV2YW50YW1lbnRvIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxMjoibGV2YW50YW1lbnRvIjthOjM6e3M6ODoiY29udGV4dG8iO2E6Njp7czoxNzoiY2lkYWRlX2NvbWFyY2FfaWQiO3M6MjoiMjMiO3M6NzoidmFyYV9pZCI7czoyOiIzNyI7czo4OiJzZXRvcl9pZCI7czoyOiIxOSI7czoxOToidGlwb19lcXVpcGFtZW50b19pZCI7czoxOiIzIjtzOjg6Im1hcmNhX2lkIjtzOjI6IjIyIjtzOjY6Im1vZGVsbyI7czo2OiI3MDBVU0IiO31zOjg6ImNvbnRhZG9yIjtpOjI7czoxMToidWx0aW1vc19pZHMiO2E6Mjp7aTowO2k6MzczO2k6MTtpOjM3Mjt9fX0=', 1778157771);
+('ogT6yU79TwUJAiPZr5Vhut7gek8PV98Rx7WK1yuG', NULL, '181.217.162.67', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNUx3bVJnZmprbEg1WVp1MlVsWE8xT1FtUW1IT2lsblhqc3dqZmJhUSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzk6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYy9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fX0=', 1778181129),
+('sGD6fj22eRNu48flUaFrtEArUCfo99fOpePBtXKh', NULL, '191.58.117.113', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiV3FmZzJHWks4dHpNN0dVVGE4MmNjTGZiWjhteDFwNFh0UEVvR3RGbCI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNzoiaHR0cHM6Ly9wYXRyaW1vbmlvLmZyZWUubmYvcHVibGljP2k9MSI7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjM5OiJodHRwczovL3BhdHJpbW9uaW8uZnJlZS5uZi9wdWJsaWMvbG9naW4iO3M6NToicm91dGUiO3M6NToibG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1778236633),
+('TKK0ZlF8pumwteowpAaVXLTiSzilFxculwELT2nJ', NULL, '45.5.14.152', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUDdzdldGVDVXbHRPcjFGUnNvNWZQQ0NJRDJJQjdTRlFteVZuQTZCZiI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzM6Imh0dHBzOi8vcGF0cmltb25pby5mcmVlLm5mL3B1YmxpYyI7czo1OiJyb3V0ZSI7czo5OiJkYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1778171649);
 
 -- --------------------------------------------------------
 
@@ -770,10 +805,26 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `papel` enum('master','admin','usuario') NOT NULL DEFAULT 'usuario',
+  `ativo` tinyint(1) NOT NULL DEFAULT 1,
+  `cidade_comarca_id` bigint(20) UNSIGNED DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `papel`, `ativo`, `cidade_comarca_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Administrador Master', 'rapwara@gmail.com', NULL, '$2y$12$9vh8nEsDfIEKgNA7WFVfR.v7VcyInZlJcJ9IIZUXqiffUEf8cQb5a', 'master', 1, NULL, 'iGob6xrEYn1qeAPaaZTZ4RtjrcMwbuc8bhQPIT4NzLbMQQFE0Dmdzhrgt4tN', '2026-05-07 18:01:33', '2026-05-07 18:26:17'),
+(2, 'Nilson', 'nrsmnilson@gmail.com', NULL, '$2y$12$QGFqb7cXKoZ35gUAJ5MVouHJsj6JQa9C9r06i30p85IiRZ/PmVVIe', 'admin', 1, NULL, NULL, '2026-05-07 18:33:24', '2026-05-07 18:33:24'),
+(3, 'Marivalda', 'marivalda.nascimento@lanlink.com.br', NULL, '$2y$12$6WKtgx8lWWEj4iEhM01uFuVc0wfkT5VBFhPPumYJXvFVWsSKypY5y', 'admin', 1, 23, NULL, '2026-05-07 18:40:33', '2026-05-07 18:48:48'),
+(4, 'Ednilson Júnior', 'ednilson.junior@lanlink.com.br', NULL, '$2y$12$GDYtsgXBStyx6UaxPcUVQ.3WaxtX/rHxhpvEwGgE7L/8bb7fgFFNS', 'admin', 1, 31, NULL, '2026-05-07 18:42:21', '2026-05-07 18:50:37'),
+(5, 'Elvis', 'elvis.almeida@lanlink.com.br', NULL, '$2y$12$p36heueiWBm1eKKmEQ.J9.JiaZ4J1FCKCgcG/vdWCZm6JgoYadB2K', 'admin', 1, 18, NULL, '2026-05-07 18:43:01', '2026-05-07 18:49:49'),
+(6, 'Rosely', 'rosely.assuncao@lanlink.com.br', NULL, '$2y$12$bT4KpF5pbqnQL54DAcjiQ.ekuNiKcuIotdzawQY22y.xPLkR1LTh2', 'admin', 1, 14, NULL, '2026-05-08 00:58:39', '2026-05-08 00:58:39'),
+(7, 'Matheus', 'pereira.matheuss@gmail.com', NULL, '$2y$12$1W7PmSusmoDWfI8VN.pqfOWKczqQWcy/JwY6ibGIXn5pj3Vv3RwCm', 'admin', 1, NULL, NULL, '2026-05-08 00:59:34', '2026-05-08 00:59:34');
 
 -- --------------------------------------------------------
 
@@ -997,7 +1048,8 @@ ALTER TABLE `tipos_equipamento`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_cidade_comarca_id_foreign` (`cidade_comarca_id`);
 
 --
 -- Índices de tabela `varas`
@@ -1020,7 +1072,7 @@ ALTER TABLE `cidades_comarcas`
 -- AUTO_INCREMENT de tabela `equipamentos`
 --
 ALTER TABLE `equipamentos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=398;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=436;
 
 --
 -- AUTO_INCREMENT de tabela `failed_jobs`
@@ -1062,7 +1114,7 @@ ALTER TABLE `tipos_equipamento`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `varas`
@@ -1083,6 +1135,12 @@ ALTER TABLE `equipamentos`
   ADD CONSTRAINT `equipamentos_setor_id_foreign` FOREIGN KEY (`setor_id`) REFERENCES `setores` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `equipamentos_tipo_equipamento_id_foreign` FOREIGN KEY (`tipo_equipamento_id`) REFERENCES `tipos_equipamento` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `equipamentos_vara_id_foreign` FOREIGN KEY (`vara_id`) REFERENCES `varas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_cidade_comarca_id_foreign` FOREIGN KEY (`cidade_comarca_id`) REFERENCES `cidades_comarcas` (`id`) ON DELETE SET NULL;
 
 --
 -- Restrições para tabelas `varas`
