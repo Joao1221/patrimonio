@@ -1,22 +1,36 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
+# Local (XAMPP subfolder) + fallback routing to /public
 
-    # Se já está em /public, não redirecionar
-    RewriteCond %{REQUEST_URI} ^/public/ [NC]
-    RewriteRule ^ - [L]
-
-    # Redirecionar tudo para public
-    RewriteCond %{REQUEST_URI} !public
-    RewriteRule ^(.*)$ public/$1 [L,R=301]
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
 </IfModule>
 
-# Segurança - bloquear arquivos ocultos
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /patrimonio/
+
+    # Root path in subfolder must point to /public/.
+    RewriteRule ^$ /patrimonio/public/ [L,R=302]
+
+    # Keep requests that already point to /patrimonio/public.
+    RewriteCond %{REQUEST_URI} ^/patrimonio/public/ [NC]
+    RewriteRule ^ - [L]
+
+    # Keep direct access to existing files/folders in project root.
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Send all app requests to Laravel public folder.
+    RewriteRule ^(.*)$ /patrimonio/public/$1 [L,R=302,QSA]
+</IfModule>
+
+# Block sensitive files.
+<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
+    Require all denied
 </FilesMatch>
 
-<FilesMatch "^(\.env|artisan|composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|pnpm-lock\.yaml)$">
+<FilesMatch "^\.">
     Require all denied
 </FilesMatch>

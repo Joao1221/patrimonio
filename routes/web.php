@@ -22,6 +22,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 // Rotas protegidas
 Route::middleware('auth')->group(function () {
+    Route::pattern('equipamento', '[0-9]+');
+    Route::pattern('tipos_equipamento', '[0-9]+');
+    Route::pattern('marca', '[0-9]+');
+    Route::pattern('cidades_comarca', '[0-9]+');
+    Route::pattern('vara', '[0-9]+');
+    Route::pattern('setore', '[0-9]+');
+    Route::pattern('usuario', '[0-9]+');
+
     Route::get('/', DashboardController::class)->name('dashboard');
 
     // Perfil do usuário logado — acessível a todos os perfis
